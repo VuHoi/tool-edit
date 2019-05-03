@@ -1,6 +1,6 @@
 import copy
 import csv
-
+import collections
 
 
 
@@ -18,7 +18,12 @@ def get_template_line(fileName):
 template_line = get_template_line('feed_template.csv')[0]
 temp1 = copy.deepcopy(template_line)
 del temp1['Keyword']
-fieldnames = temp1.keys()
+temp1['additional_image_link1']=''
+d= collections.OrderedDict(
+    [('id', ''), ('custom_label_0', ''), ('custom_label_1', ''), ('custom_label_2', ''), ('custom_label_3', ''), ('custom_label_4', ''), ('title', ''), ('link', ''), ('image_link', ''), ('additional_image_link', ''),('additional_image_link1', ''),('additional_image_link2', ''),('additional_image_link3', ''),('additional_image_link4', ''),('additional_image_link5', ''),('additional_image_link6', ''),('additional_image_link7', ''),('additional_image_link8', ''),('additional_image_link9', ''),('additional_image_link10', ''), ('availability', ''), ('description', ''), ('google_product_category', 'Vehicles & Parts > Vehicle Parts & Accessories > Vehicle Maintenance, Care & Decor > Vehicle Decor > Vehicle Decor Accessory Sets'), ('price', ''), ('brand', ''), ('gtin', ''), ('condition', ''), ('adult', ''), ('is_bundle', ''), ('age_group', ''), ('tax', ''), ('color', ''), ('gender', ''), ('size', ''), ('shipping', 'Universal Fit'), ('product_type', ''), ('identifier_exists', ''), ('promotion_id', ''), ('item_group_id', '{{id}}')]
+)
+fieldnames = d.keys()
+
 templates=  get_template_line('feed_template.csv')
 data= copy.deepcopy(get_template_line('tmp.csv'))
 parent_data = copy.deepcopy(template_line)
@@ -39,7 +44,7 @@ with open('output/output.csv', 'w', newline='\n') as f:
                     parent_data['image_link']=item['image_link']
                     parent_data['title']=item['title']
                     parent_data['link']=item['link']
-                    parent_data['additional_image_link']=item['additional_image_link']
+                    # parent_data['additional_image_link']=item['additional_image_link']
                     parent_data['availability']=item['availability']
                     parent_data['description']=item['description']
                     parent_data['price']=item['price']
@@ -52,7 +57,6 @@ with open('output/output.csv', 'w', newline='\n') as f:
                     parent_data['size']=item['size']
                     parent_data['product_type']=item['product_type']
                     parent_data['id']=item['id']
-                    print(parent_data)
                     a= copy.deepcopy(parent_data)
                     del a['Keyword']
                     writer.writerow(a)
